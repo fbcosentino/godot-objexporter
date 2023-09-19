@@ -34,5 +34,12 @@ func _on_export_progress(surf_idx, progress_value):
 	progress_bar.value = progress_value * 100.0
 
 
-func _on_button_pressed():
+
+
+func _on_btn_export_pressed():
 	OBJExporter.save_mesh_to_files($MeshInstance3D.mesh, $SettingsPanel/EditPath.text, $SettingsPanel/EditFilename.text)
+
+
+
+func _on_btn_import_pressed():
+	$MeshInstance3D.mesh = OBJExporter.load_mesh_from_file("res://example/suzanne/suzanne.obj")

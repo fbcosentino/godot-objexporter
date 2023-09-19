@@ -37,8 +37,8 @@ layout_mode = 3
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -373.0
-offset_right = 373.0
+offset_left = -468.0
+offset_right = 468.0
 offset_bottom = 91.0
 grow_horizontal = 2
 
@@ -70,13 +70,21 @@ offset_right = 40.0
 offset_bottom = -9.0
 text = "File name (without extension)"
 
-[node name="Button" type="Button" parent="SettingsPanel"]
+[node name="BtnExport" type="Button" parent="SettingsPanel"]
 offset_left = 493.0
 offset_top = 40.0
-offset_right = 730.0
+offset_right = 701.0
 offset_bottom = 71.0
 focus_mode = 0
 text = "Export"
+
+[node name="BtnImport" type="Button" parent="SettingsPanel"]
+offset_left = 709.0
+offset_top = 40.0
+offset_right = 917.0
+offset_bottom = 71.0
+focus_mode = 0
+text = "Import Suzanne"
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 1, 3)
@@ -88,4 +96,5 @@ transform = Transform3D(0.670737, 0.546082, -0.501902, 0, 0.676696, 0.736262, 0.
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("TubeTrailMesh_kif4b")
 
-[connection signal="pressed" from="SettingsPanel/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="SettingsPanel/BtnExport" to="." method="_on_btn_export_pressed"]
+[connection signal="pressed" from="SettingsPanel/BtnImport" to="." method="_on_btn_import_pressed"]

@@ -115,3 +115,9 @@ func save_mesh_to_files(mesh: Mesh, file_path: String, object_name: String):
 	file_mtl.store_string(mat_output)
 	
 	emit_signal("export_completed", obj_file, mat_file)
+
+
+func load_mesh_from_file(filename: String, material_filename: String = "") -> Mesh:
+	# Transparent call to Ezcha's gd-obj
+	
+	return ObjParse.load_obj(filename, material_filename)

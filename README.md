@@ -1,12 +1,12 @@
 # OBJExporter Plugin for Godot 4.x
 
-Godot plugin to export meshes as OBJ (`.obj`, `.mtl`) from games and apps during runtime. Does not use any editor-only classes, and is pure GDScript (not requiring mono version nor any GDExtension shenanigans).
+Godot plugin to export and import meshes as OBJ (`.obj`, `.mtl`) from games and apps during runtime. Does not use any editor-only classes, and is pure GDScript (not requiring mono version nor any GDExtension shenanigans).
 
-Based on the work of mohammedzero43's [CGSExporter](https://github.com/mohammedzero43/CSGExport-Godot) and fractilegames's [godot-obj-export](https://github.com/fractilegames/godot-obj-export).
+Based on the work of mohammedzero43's [CGSExporter](https://github.com/mohammedzero43/CSGExport-Godot) and fractilegames's [godot-obj-export](https://github.com/fractilegames/godot-obj-export) for the exporter, and includes a wrapper method for the `ObjParse` class from Ezcha's [gd-obj](https://github.com/Ezcha/gd-obj) for importing.
 
 ----
 
-## How To Use
+## How To Export Meshes
 
 Install the plugin, activate it. This will make the `OBJExporter` singleton available to your game/app.
 
@@ -55,6 +55,24 @@ func _ready():
 	OBJExporter.export_progress_updated.connect(_on_export_progress)
 ```
 
+
+## How To Import Meshes
+
+To import a mesh from an `.obj` file autodetecting the `.mtl` file, call:
+
+
+```gdscript
+OBJExporter.load_mesh_from_file(file_path)
+```
+
+Or you can also manually specify the material file:
+
+```gdscript
+OBJExporter.load_mesh_from_file(obj_file_path, mtl_file_path)
+```
+
+This method is fully synchronous and will return the mesh (it is a transparent call to `ObjParse.load_obj`).
+
 ----
 
 ## Included Example Project
@@ -67,3 +85,15 @@ Included in the repo is an example project which exports the built-in mesh from 
 The exported `.obj`/`.mtl`, later imported into Blender:
 
 ![](example/docs/example_exported.png)
+
+
+Clicking `Import Suzanne` will do [exactly what it says on the tin](https://en.wikipedia.org/wiki/Does_exactly_what_it_says_on_the_tin):
+
+![](example/docs/example_suzanne.png)
+
+
+----
+
+## Known issues:
+
+Importing Suzanne (`res://example/suzanne/suzanne.obj`) and trying to re-export the model will fail claiming the file is not indexed (that is, `mesh.surface_get_arrays()` returned a surface with the `ArrayMesh.ARRAY_INDEX` being `null`). This happens because the OBJ format doesn't include vertex indices, and this exporter uses indices, so `.obj` -> Godot -> `.obj` requires intermediate code to regenerate vertex indices in the imported file. If you know how to do this please by all means feel free to make a PR here.
