@@ -1,0 +1,91 @@
+[gd_scene load_steps=5 format=3 uid="uid://ctxwbm3fy6c07"]
+
+[ext_resource type="Script" path="res://example/Example.gd" id="1_livsn"]
+
+[sub_resource type="Curve" id="Curve_b4dwi"]
+_data = [Vector2(0, 0.501779), 0.0, 0.0, 0, 0, Vector2(0.19589, 0.430605), 0.0, 0.0, 0, 0, Vector2(0.300725, 0.629893), 3.74418, 3.74418, 0, 0, Vector2(0.368493, 0.814947), 0.0, 0.0, 0, 0, Vector2(0.40411, 0.715303), 0.0, 0.0, 0, 0, Vector2(0.434247, 0.857651), 0.366757, 0.366757, 0, 0, Vector2(0.719178, 0.843416), -0.820378, -0.820378, 0, 0, Vector2(0.99999, 0.587189), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 9
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k8nw8"]
+albedo_color = Color(0.521569, 0.321569, 0.0980392, 1)
+
+[sub_resource type="TubeTrailMesh" id="TubeTrailMesh_kif4b"]
+material = SubResource("StandardMaterial3D_k8nw8")
+radial_steps = 16
+sections = 12
+section_length = 0.1
+curve = SubResource("Curve_b4dwi")
+
+[node name="Scene" type="Node3D"]
+script = ExtResource("1_livsn")
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+offset_left = 34.0
+offset_top = 66.0
+offset_right = 268.0
+offset_bottom = 93.0
+
+[node name="Label" type="Label" parent="ProgressBar"]
+layout_mode = 0
+offset_top = -32.0
+offset_right = 40.0
+offset_bottom = -9.0
+text = "Exporting..."
+
+[node name="SettingsPanel" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -373.0
+offset_right = 373.0
+offset_bottom = 91.0
+grow_horizontal = 2
+
+[node name="EditPath" type="LineEdit" parent="SettingsPanel"]
+layout_mode = 0
+offset_left = 13.0
+offset_top = 40.0
+offset_right = 223.0
+offset_bottom = 71.0
+text = "user://"
+
+[node name="Label" type="Label" parent="SettingsPanel/EditPath"]
+offset_top = -32.0
+offset_right = 40.0
+offset_bottom = -9.0
+text = "Location (folder)"
+
+[node name="EditFilename" type="LineEdit" parent="SettingsPanel"]
+layout_mode = 0
+offset_left = 237.0
+offset_top = 40.0
+offset_right = 477.0
+offset_bottom = 71.0
+text = "my_file"
+
+[node name="Label" type="Label" parent="SettingsPanel/EditFilename"]
+offset_top = -32.0
+offset_right = 40.0
+offset_bottom = -9.0
+text = "File name (without extension)"
+
+[node name="Button" type="Button" parent="SettingsPanel"]
+offset_left = 493.0
+offset_top = 40.0
+offset_right = 730.0
+offset_bottom = 71.0
+focus_mode = 0
+text = "Export"
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 1, 3)
+fov = 50.0
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.670737, 0.546082, -0.501902, 0, 0.676696, 0.736262, 0.741695, -0.493839, 0.453885, -2, 1.30704, 2.57359)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("TubeTrailMesh_kif4b")
+
+[connection signal="pressed" from="SettingsPanel/Button" to="." method="_on_button_pressed"]
