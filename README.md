@@ -94,6 +94,4 @@ Clicking `Import Suzanne` will do [exactly what it says on the tin](https://en.w
 
 ----
 
-## Known issues:
-
-Importing Suzanne (`res://example/suzanne/suzanne.obj`) and trying to re-export the model will fail claiming the file is not indexed (that is, `mesh.surface_get_arrays()` returned a surface with the `ArrayMesh.ARRAY_INDEX` being `null`). This happens because the OBJ format doesn't include vertex indices, and this exporter uses indices, so `.obj` -> Godot -> `.obj` requires intermediate code to regenerate vertex indices in the imported file. If you know how to do this please by all means feel free to make a PR here.
+Thanks to [bananu7](https://github.com/bananu7) for pointing me in the right direction on indexing vertices with `SurfaceTool`.

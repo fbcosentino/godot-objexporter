@@ -16,6 +16,8 @@ const debug: bool = false
 # MIT License
 # https://github.com/Ezcha/gd-obj/blob/master/LICENSE
 
+# Modified by fbcosentino to include vertex indexing
+
 # Create mesh from obj and mtl paths
 static func load_obj(obj_path: String, mtl_path: String = "") -> Mesh:
 	var obj_str: String = _read_file_str(obj_path)
@@ -268,6 +270,9 @@ static func _create_obj(obj: String, mats: Dictionary) -> Mesh:
 							var uv = uvs[f]
 							fan_vt.append(uv)
 				st.add_triangle_fan(fan_v, fan_vt, PackedColorArray(), PackedVector2Array(), fan_vn, [])
+		
+		st.index()
+		
 		mesh = st.commit(mesh)
 	
 	for k in mesh.get_surface_count():
