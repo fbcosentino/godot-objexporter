@@ -198,9 +198,10 @@ static func _create_obj(obj: String, mats: Dictionary) -> Mesh:
 						var vertices_index: PackedStringArray = map.split("/")
 						if (vertices_index[0] != "f"):
 							face["v"].append(vertices_index[0].to_int() - 1)
-							face["vt"].append(vertices_index[1].to_int() - 1)
-							if (vertices_index.size() > 2):
-								face["vn"].append(vertices_index[2].to_int() - 1)
+							if (vertices_index.size() > 1):
+								face["vt"].append(vertices_index[1].to_int() - 1)
+								if (vertices_index.size() > 2):
+									face["vn"].append(vertices_index[2].to_int() - 1)
 					if (faces.has(mat_name)):
 						faces[mat_name].append(face)
 				elif (parts.size() > 4):
