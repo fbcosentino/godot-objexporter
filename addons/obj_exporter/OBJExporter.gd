@@ -64,7 +64,7 @@ func save_mesh_to_files(mesh: Mesh, file_path: String, object_name: String) -> v
 			if has_n:
 				if not has_uv:
 					Output.append("/")
-				Output.append("/ %s" % [index_base + indices[i]])
+				Output.append("/%s" % [index_base + indices[i]])
 			
 			Output.append(" %s" % [index_base + indices[i + 2]])
 			if has_uv:
@@ -72,7 +72,7 @@ func save_mesh_to_files(mesh: Mesh, file_path: String, object_name: String) -> v
 			if has_n:
 				if not has_uv:
 					Output.append("/")
-				Output.append("/%S" % [index_base + indices[i + 2]])
+				Output.append("/%s" % [index_base + indices[i + 2]])
 			
 			Output.append(" %s" % [index_base + indices[i + 1]])
 			if has_uv:
