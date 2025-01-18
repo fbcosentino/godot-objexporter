@@ -36,7 +36,7 @@ func save_mesh_to_files(mesh: Mesh, file_path: String, object_name: String) -> v
 
 		var has_uv: bool = false
 		if surface[ArrayMesh.ARRAY_TEX_UV] != null:
-			for uv: Vector3 in surface[ArrayMesh.ARRAY_TEX_UV]:
+			for uv: Vector2 in surface[ArrayMesh.ARRAY_TEX_UV]:
 				Output.append("vt %s %s\n" % [uv.x, 1.0 - uv.y])
 			has_uv = true
 
