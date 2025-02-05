@@ -94,10 +94,11 @@ static func _create_mtl(obj: String, textures: Dictionary) -> Dictionary:
 				pass
 			"newmtl":
 				# Create a new material
+				var mat_name := parts[1].strip_edges()
 				if debug:
-					prints("Adding new material", parts[1])
+					prints("Adding new material", mat_name)
 				currentMat = StandardMaterial3D.new()
-				mats[parts[1]] = currentMat
+				mats[mat_name] = currentMat
 			"Ka":
 				# Ambient color
 				#currentMat.albedo_color = Color(float(parts[1]), float(parts[2]), float(parts[3]))
